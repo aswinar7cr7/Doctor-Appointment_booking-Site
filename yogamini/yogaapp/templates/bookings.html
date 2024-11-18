@@ -1,0 +1,57 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Bookings</title>
+    <link rel="stylesheet" href="{% static 'css/bookings.css' %}">
+</head>
+<body>
+    <form>
+        {% csrf_token %}
+    </form>
+    
+    <div class="container">
+        <h2>Customer Bookings</h2>
+        <div id="bookings-container">
+            {% if customers %}
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Date</th>
+                            <th>Time</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for customer in customers %}
+                            <tr>
+                                <td>{{ customer.id }}</td>
+                                <td>{{ customer.firstname }} {{ customer.lastname }}</td>
+                                <td>{{ customer.date }}</td>
+                                <td>{{ customer.time }}</td>
+                                <td>
+                                    <!-- Delete button with customer ID -->
+                                    <button class="delete-button" data-booking-id="{{ customer.id }}">Delete</button>
+                                    <!-- Update button with customer ID -->
+                                    <button class="update-button" data-booking-id="{{ customer.id }}" data-booking-date="{{ customer.date }}" data-booking-time="{{ customer.time }}">Update</button>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+                <p>No customer bookings found.</p>
+            {% endif %}
+        </div>
+        <a href="{% url 'home' %}" class="back-home">Back to Home</a>
+    </div>
+    <input type="hidden" id="csrf_token" value="{% csrf_token %}">
+
+    <script src="{% static 'js/bookings.js' %}"></script>
+</body>
+</html>

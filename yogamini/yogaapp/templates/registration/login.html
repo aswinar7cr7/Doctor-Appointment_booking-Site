@@ -1,0 +1,33 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+    <div class="form-container">
+        <h2>Login</h2>
+        <form method="post" onsubmit="return validateForm()">
+            {% csrf_token %}
+            <table>
+                {{ form.as_table }}
+            </table>
+            <input type="submit" value="Login">
+            <p class="error-msg">{{ msg }}</p>
+
+            <p style="margin-top: 1rem;">
+                Forgot password? <a href="{% url 'forgot' %}">Forgot password?</a>
+            </p>
+            <br>
+            <p>
+                New user? <a href="{% url 'register' %}">Register</a>
+            </p>
+        </form>
+    </div>
+
+    <script src="{% static 'js/scripts.js' %}"></script>
+</body>
+</html>

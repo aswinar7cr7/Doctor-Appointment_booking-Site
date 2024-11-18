@@ -1,0 +1,25 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <link rel="stylesheet" href="{% static 'css/register.css' %}">
+</head>
+<body>
+    <div class="form-container">
+        <h2>Create an Account</h2>
+        <form method="post">
+            {% csrf_token %}
+            <table>
+                {{ form.as_table }}
+            </table>
+            <input type="submit" value="Sign Up">
+        </form>
+        <p class="error-msg">{{ msg }}</p>
+    </div>
+
+    <script src="{% static 'js/register.js' %}"></script>
+</body>
+</html>

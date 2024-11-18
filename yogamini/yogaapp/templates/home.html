@@ -1,0 +1,38 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Form</title>
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+</head>
+<body>
+    <div class="form-container">
+        <h2>Patient Form</h2>
+        <form method="post" action="{% url 'add' %}">
+            {% csrf_token %}
+            <table>
+                {{ myform.as_table }}
+            </table>
+            <input type="submit" value="Get Appointment">
+        </form>
+        <p class="error-msg">{{ msg }}</p>
+
+        <form method="post" action="{% url 'bookings' %}">
+            {% csrf_token %}
+            <input type="submit" value="View Bookings">
+        </form>
+        <p></p>
+        <form method="post" action="{% url 'logout' %}">
+            {% csrf_token %}
+            <input type="submit" value="Logout">
+        </form>
+
+
+        
+    </div>
+
+    <script src="{% static 'js/home.js' %}"></script>
+</body>
+</html>
